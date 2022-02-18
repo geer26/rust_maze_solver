@@ -1,5 +1,6 @@
 use uuid::Uuid;
 use std::io;
+use std::fs;
 
 enum Type{
     Visited,
@@ -43,5 +44,10 @@ fn main() {
     io::stdin()
         .read_line(&mut maze)
         .expect("Failed to read line");
-    println!("You entered: {}", &maze);
+
+    let maze = maze.to_string();
+
+    let contents = fs::read_to_string(maze)
+        .expect("Something went wrong reading the file");
+    println!("MAZE:\n{}", contents)
 }
