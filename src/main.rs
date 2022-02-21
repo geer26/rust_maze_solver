@@ -45,9 +45,25 @@ fn main() {
         .read_line(&mut maze)
         .expect("Failed to read line");
 
-    let maze = maze.to_string();
+    //let maze = maze.;
 
-    let contents = fs::read_to_string(maze)
+    //let contents = fs::read_to_string(maze)
+    let contents = fs::read_to_string("to_text.txt")
         .expect("Something went wrong reading the file");
-    println!("MAZE:\n{}", contents)
+    println!("MAZE:\n{}", contents);
+
+    let mut rows = contents.trim().split('\n');
+    for (r_index,row) in rows.into_iter().enumerate(){
+        /*
+        items.iter().enumerate().for_each(|(i, x)| {
+            println!("Item {} = {}", i, x);
+        })
+        */
+
+        for (c_index, column) in row.split("").into_iter().enumerate(){
+            println!("ROW - {} : COLUMN - {} :: VALUE - {}", r_index, c_index, column);
+        }
+        //println!("ROW:");
+        //println!("{}", row);
+    }
 }
