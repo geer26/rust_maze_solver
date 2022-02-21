@@ -1,3 +1,6 @@
+extern crate core;
+
+use core::num::dec2flt::parse::parse_number;
 use uuid::Uuid;
 use std::io;
 use std::fs;
@@ -16,8 +19,8 @@ enum Parent{
 }
 
 struct Point{
-    x: u32,
-    y: u32,
+    x: u64,
+    y: u64,
     t: Type,
     id: String,
     parent: Parent,
@@ -40,6 +43,7 @@ fn main() {
     println!("Maze solver - V0.1");
     println!("Please enter filename to solve!");
     let mut maze = String::new();
+    let mut points = vec![Point];
 
     io::stdin()
         .read_line(&mut maze)
@@ -54,16 +58,17 @@ fn main() {
 
     let mut rows = contents.trim().split('\n');
     for (r_index,row) in rows.into_iter().enumerate(){
-        /*
-        items.iter().enumerate().for_each(|(i, x)| {
-            println!("Item {} = {}", i, x);
-        })
-        */
-
-        for (c_index, column) in row.split("").into_iter().enumerate(){
+        for (c_index, column) in row.chars().into_iter().enumerate(){
             println!("ROW - {} : COLUMN - {} :: VALUE - {}", r_index, c_index, column);
+            let mut ty: Type;
+            if column == '#'{ ty = Type::Wall} else { ty = Type::Floor }
+            let p = Point{
+                x: r_index,
+                y: c_index,
+                t: ty,
+                id: "123456".to_string(),
+                parent: Parent::None
+            }
         }
-        //println!("ROW:");
-        //println!("{}", row);
     }
 }
