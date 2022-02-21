@@ -61,12 +61,13 @@ fn main() {
         for (c_index, column) in row.chars().into_iter().enumerate(){
             println!("ROW - {} : COLUMN - {} :: VALUE - {}", r_index, c_index, column);
             let mut ty: Type;
+            //let uuid = Uuid::
             if column == '#'{ ty = Type::Wall} else { ty = Type::Floor }
             let p = Point{
                 x: r_index,
                 y: c_index,
                 t: ty,
-                id: "123456".to_string(),
+                id: Uuid::new_v4().to_string(),
                 parent: Parent::None
             };
             &points.push(p);
